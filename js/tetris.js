@@ -2,7 +2,7 @@
 import BLOCKS from "./blocks.js";
 
 // ---- DOM ----
-// ul 가져오기 
+// ul 가져오기 (테트리스 게임 공간)
 const playground = document.querySelector(".playground > ul");
 // 게임오버시 text
 const gameText = document.querySelector(".game-text");
@@ -12,9 +12,9 @@ const scoreDisplay = document.querySelector(".score");
 const restartButton = document.querySelector(".game-text > button");
 
 // ---- SETTING ----
-// 세로 
+// 세로 20줄
 const GAME_ROWS = 20;
-// 가로 
+// 가로 10줄
 const GAME_COLS = 10;
 
 
@@ -23,6 +23,7 @@ const GAME_COLS = 10;
 let score = 0;
 // 블럭이 떨어지는 시간 
 let duration = 500;
+// 변수 선언만
 let downInterval;
 let tempMovingItem;
 
@@ -38,15 +39,21 @@ const movingItem = {
 // 게임 판을 만들어주는 함수 prependNewLine
 // li 20줄 만들기 . li 안에 ul 안에 li => 블록 하나하나 10개
 const prependNewLine = () => {
+    // li, ul element 만들기 
     const li = document.createElement("li");
     const ul = document.createElement("ul");
-    // 블록(li) 10개 만들어서 ul 에 넣음
+    // 블록(li) 10개 만들어서 ul(한 줄) 에 넣음
+    // for 문 10번 반목(블록 10개 만들어서 ul 에 넣기)
     for(let j = 0; j < GAME_COLS; j++) {
+        // 한 블록을 만들어서 
         const matrix = document.createElement("li");
+        // ul(한 줄) 에 넣는다. 
         ul.prepend(matrix);
     }
+    // ul 을 li 에 넣기 
     // 만들어진 블록 10개를 li(한 줄에 해당) 에 넣음 
     li.prepend(ul);
+    // li 를 게임 판에 넣기 
     // 만들어진 한 줄 한 줄을 playground 안에 넣음 
     playground.prepend(li);
 }
